@@ -6,16 +6,13 @@ from datetime import datetime
 # File to store application data
 import os
 
-# Get the user's Downloads directory
-home_dir = os.path.expanduser("~")
-FILE_PATH = os.path.join(home_dir, "Downloads", "Application Tracker.csv")
+
 
 
 # Load existing data if the file exists
-if os.path.exists(FILE_PATH):
-    app_df = pd.read_csv(FILE_PATH)
-else:
-    app_df = pd.DataFrame(columns=["Date", "Company", "Role", "POC", "Status"])
+
+app_df = pd.read_csv("Application Tracker.csv")
+
 
 # Convert DataFrame to session state
 if "applications" not in st.session_state:
@@ -34,7 +31,7 @@ def new_application():
     st.session_state.applications.append(new_entry)
     
     # Save to CSV
-    pd.DataFrame(st.session_state.applications).to_csv(FILE_PATH, index=False)
+    pd.DataFrame(st.session_state.applications).to_csv("Application Tracker.csv", index=False)
     
     st.rerun()
 
