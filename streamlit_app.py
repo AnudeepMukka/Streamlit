@@ -7,7 +7,6 @@ if "scores" not in st.session_state:
         {"name": "Josh", "Pushups": 10, "Situps": 20},
     ]
 
-
 def new_scores():
     """Function to add new scores to the session state"""
     st.session_state.scores.append(
@@ -17,8 +16,7 @@ def new_scores():
             "Situps": st.session_state.situps,
         }
     )
-    st.experimental_rerun()  # Force UI update
-
+    st.rerun()  # Use this instead of experimental_rerun()
 
 st.write("# Score Table")
 
@@ -26,7 +24,7 @@ st.write("# Score Table")
 score_df = pd.DataFrame(st.session_state.scores)
 score_df["Total Points"] = score_df["Pushups"] + score_df["Situps"]
 
-st.dataframe(score_df)  # Use `st.dataframe()` for better table formatting
+st.dataframe(score_df)  # Use st.dataframe() for better formatting
 
 st.write("# Add a New Score")
 
